@@ -1,0 +1,53 @@
+<div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+  <ul
+    class="flex flex-wrap -mb-px text-sm font-medium text-center"
+    id="myTab"
+    data-tabs-toggle="#myTabContent"
+    role="tablist"
+  >
+    <% data.domains.forEach((domain)=>{ %>
+    <li class="mr-2" role="presentation">
+      <button
+        class="inline-block p-4 border-b-2 rounded-t-lg"
+        id="<%= domain.tld %>-tab"
+        data-tabs-target="#<%= domain.tld %>"
+        type="button"
+        role="tab"
+        aria-controls="<%= domain.tld %>"
+        aria-selected="false"
+      >
+        <%= domain.tld %>
+      </button>
+    </li>
+    <% }) %>
+  </ul>
+</div>
+<div id="myTabContent">
+  <% data.domains.forEach((tld)=>{ %>
+  <div
+    class="hidden p-4 rounded bg-gray-50 dark:bg-gray-800"
+    id="<%= tld.tld %>"
+    role="tabpanel"
+    aria-labelledby="<%= tld.tld %>-tab"
+  >
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead
+        class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+      >
+        <th scope="col" class="px-6 py-3">Domain</th>
+        <th scope="col" class="px-6 py-3">Amount</th>
+        <th scope="col" class="px-6 py-3">Current Bid</th>
+      </thead>
+      <tbody>
+        <% tld.domains.forEach((domain)=>{ %>
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <td class="px-6 py-4"><%= domain.url %></td>
+          <td class="px-6 py-4"><%= domain.askAmount %></td>
+          <td class="px-6 py-4"><%= domain.currentBid %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <% }) %>
+</div>

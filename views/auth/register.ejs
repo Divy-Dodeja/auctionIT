@@ -1,0 +1,70 @@
+<%- include("../partials/header.ejs") %> <%-
+include("../partials/components/nav.ejs") %>
+
+<div class="container mx-auto p-5 min-h-[80vh]">
+  <section class="text-gray-600 body-font">
+    <div
+      class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center justify-between"
+    >
+      <div class="w-full mb-10 md:mb-0">
+        <img
+          class="object-cover object-center rounded"
+          alt="hero"
+          src="/assets/register.png"
+          width="800px"
+        />
+      </div>
+      <div class="">
+        <h1
+          class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900"
+        >
+          Register Now!
+        </h1>
+        <p class="mb-2">
+          Get Access to premium range of domains which are in auction Right now!
+        </p>
+        <form
+          class="flex w-full md:justify-start justify-center items-end"
+          method="post"
+          id="form"
+        >
+          <div class="relative mr-4">
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              placeholder="First Name"
+              class="w-full my-2 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:ring-2 focus:ring-indigo-200 focus:bg-transparent focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            />
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              placeholder="Last Name"
+              class="w-full my-2 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:ring-2 focus:ring-indigo-200 focus:bg-transparent focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email"
+              class="w-full my-2 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:ring-2 focus:ring-indigo-200 focus:bg-transparent focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+              class="w-full my-2 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:ring-2 focus:ring-indigo-200 focus:bg-transparent focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            />
+            <button class="w-full py-2 text-white my-2 bg-indigo-500">
+              Register Now
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- footer -->
+<%- include("../partials/footer.ejs") %>

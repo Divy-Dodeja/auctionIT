@@ -1,0 +1,103 @@
+<%- include("../partials/header.ejs") %> <%-
+include("../partials/components/nav.ejs") %>
+
+<div class="container mx-auto p-5 min-h-[80vh]">
+  <div
+    class="block bg-white p-5 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+  >
+    <div class="flex items-center justify-between">
+      <h1 class="text-2xl my-2">DASHBOARD</h1>
+      <a
+        href="/domains/new"
+        class="text-center my-2 p-2 bg-indigo-500 rounded text-white"
+      >
+        Sell Domain
+      </a>
+    </div>
+    <hr />
+    <h5 class="my-2">hi <%= user.firstName %> <%= user.lastName %>,</h5>
+    <div class="w-full p-4 bg-gray-200 grid grid-cols-2 gap-2">
+      <!-- dashboard card start -->
+      <div
+        class="rounded bg-lime-700 text-center text-white p-4 flex flex-col justify-center items-center"
+      >
+        <h4>BIDS</h4>
+        <p class="p-4 bg-lime-500 w-2/4 my-2"><%= data.counts.bids %></p>
+      </div>
+      <!-- dashboard card end -->
+
+      <!-- dashboard card start -->
+      <div
+        class="rounded bg-teal-700 text-center text-white p-4 flex flex-col justify-center items-center"
+      >
+        <h4>DOMAINS</h4>
+        <p class="p-4 bg-teal-500 w-2/4 my-2"><%= data.counts.domains %></p>
+      </div>
+      <!-- dashboard card end -->
+    </div>
+    <!-- card ending  -->
+  </div>
+  <div class="my-2 w-full">
+    <div class="grid grid-cols-2 gap-2 p-4">
+      <div class="border border-gray-200 p-2">
+        <h2 class="p-2 text-2xl">Bids</h2>
+        <table
+          class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
+        >
+          <thead
+            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+          >
+            <th scope="col" class="px-6 py-3">Domain</th>
+            <th scope="col" class="px-6 py-3">Your Bid</th>
+            <th scope="col" class="px-6 py-3">Current Bid</th>
+          </thead>
+          <tbody>
+            <% data.bids.map((bid)=>{ %>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <td class="px-6 py-4"><%= bid.domain.url %></td>
+              <td class="px-6 py-4"><%= bid.amount %></td>
+              <td class="px-6 py-4"><%= bid.domain.currentBid %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+      <div class="border border-gray-200 p-2">
+        <% if(data.counts.domains > 0){ %>
+        <h2 class="p-2 text-2xl">Domains</h2>
+        <table
+          class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
+        >
+          <thead
+            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+          >
+            <th scope="col" class="px-6 py-3">Domain</th>
+            <th scope="col" class="px-6 py-3">Amount</th>
+          </thead>
+          <tbody>
+            <% data.domains.map((domain)=>{ %>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <td class="px-6 py-4"><%= domain.url %></td>
+              <td class="px-6 py-4"><%= domain.currentBid %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <% }else{ %>
+        <div class="flex flex-col items-center justify-center h-full">
+          <h1>No Domains Listed For Sale</h1>
+          <a
+            href="/domains/new"
+            class="text-center my-2 p-2 bg-indigo-500 rounded text-white"
+          >
+            Sale Now!
+          </a>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- footer -->
+<%- include("../partials/footer.ejs") %>

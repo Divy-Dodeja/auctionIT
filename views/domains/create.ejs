@@ -1,0 +1,22 @@
+<%- include("../partials/header.ejs") %>
+<body>
+    <%- include("../partials/components/nav.ejs") %>
+   <div class="container mx-auto p-5 min-h-[80vh]">
+        <div class="grid grid-cols-2 gap-2 h-full  bg-white p-2">
+            <img src="https://unsplash.it/800/600"/>
+            <div class="h-full flex justify-center items-center w-full">
+                <form class="flex flex-col gap-2 p-5 w-4/5 bg-gray-100 rounded" id="create-form">
+                    <h1 class="text-4xl font-bold text-center">List Your Domain For Sale</h1>
+                    <input type="text" placeholder="Domain Name" name="url" />
+                    <input type="number" placeholder="Minimum Amount" name="askAmount" />
+                    
+                    <div class="flex items-center"><input type="checkbox" checked  class="mx-2"  name="isAutoList" id="autolist"/><label for="autolist">List Automatically</label> </div>
+                    <button class="bg-indigo-500 p-2 text-white">Sell Now!</button>
+                </form>
+            </div>
+        </div>
+   </div>
+   <!-- footer -->
+   <%- include("../partials/footer.ejs") %>
+</body>
+</html>

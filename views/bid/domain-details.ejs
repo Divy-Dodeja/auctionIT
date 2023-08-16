@@ -1,0 +1,158 @@
+<%- include("../partials/header.ejs") %> <%-
+include("../partials/components/nav.ejs") %>
+
+<div class="container mx-auto p-5 min-h-[80vh]">
+  <div
+    class="block bg-white p-5 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+  >
+    <div class="flex justify-between items-center">
+      <h4
+        class="mb-2 text-5xl font-bold tracking-tight text-gray-900 dark:text-white"
+      >
+        <%= data.domain.url %>
+      </h4>
+      <p class="text-gray-400">Auction Id: <%= data.domain._id %></p>
+    </div>
+    <div class="flex gap-2">
+      <div class="my-5 w-full block bg-gray-100 p-5">
+        <p class="my-2">Details:</p>
+        <p class="text-2xl mb-2">
+          Ends:
+          <span class="text-gray-600"
+            ><%= data.domain.lastDateOfAuction.toLocaleString() %></span
+          >
+        </p>
+        <hr />
+
+        <p class="text-2xl my-4">
+          Current Bid:
+          <span class="text-gray-600">$<%= data.domain.currentBid %></span>
+        </p>
+        <p class="text-bold mt-6">Place Your Bid Now!</p>
+        <form
+          method="post"
+          id="bid-form"
+          class="flex justify-center item-center gap-2 mt-1"
+        >
+          <input type="hidden" name="domainId" value="<%= data.domain._id %>" />
+          <input
+            class="p-2 w-9/12"
+            type="number"
+            placeholder="bid amount"
+            name="amount"
+            min="<%= data.domain.currentBid + 1 %>"
+          />
+          <% if(!user){ %>
+          <a
+            href="/auth/login"
+            class="p-2 w-3/12 bg-indigo-500 text-white text-center"
+            >Place Bid</a
+          >
+          <% }else{ %>
+          <button class="p-2 w-3/12 bg-indigo-500 text-white">Place Bid</button>
+          <% } %>
+        </form>
+      </div>
+
+      <div class="my-5 w-full block p-5">
+        <div class="grid grid-cols-3 gap-2">
+          <!-- domain card start -->
+          <div
+            class="p-5 bg-emerald-700 flex flex-col justify-center text-white gap-3 text-center"
+          >
+            <p class="drop-shadow-lg">EXTENSION LENGTH</p>
+            <p class="p-5 drop-shadow-lg bg-emerald-500 rounded-md mx-auto">
+              <%= data.domain.url.length %>
+            </p>
+            <p class="drop-shadow-lg">characters in domain</p>
+          </div>
+          <!-- domain card end -->
+
+          <!-- domain card start -->
+          <div
+            class="p-5 bg-sky-700 flex flex-col justify-center text-white gap-3 text-center"
+          >
+            <p>YEAR REGISTERED</p>
+            <p class="p-5 bg-sky-500 rounded-md mx-auto">
+              <%= data.domain.whois.registrationDate.getFullYear() %>
+            </p>
+            <p>
+              <%= new Date().getFullYear() -
+              data.domain.whois.registrationDate.getFullYear() %> years old
+            </p>
+          </div>
+          <!-- domain card end -->
+
+          <!-- domain card start -->
+          <div
+            class="p-5 bg-amber-700 flex flex-col justify-center text-white gap-3 text-center"
+          >
+            <p>YEAR EXPIRING</p>
+            <p class="p-5 bg-amber-500 rounded-md mx-auto">
+              <%= data.domain.whois.expirationDate.getFullYear() %>
+            </p>
+            <p>
+              <%= new Date().getFullYear() -
+              data.domain.whois.registrationDate.getFullYear() %> years old
+            </p>
+          </div>
+          <!-- domain card end -->
+
+          <!-- domain card start -->
+          <div
+            class="p-5 col-span-3 bg-violet-700 flex flex-col justify-center text-white gap-3 text-center"
+          >
+            <p>DOMAIN REGISTARAR</p>
+            <p class="p-5 bg-violet-500 rounded-md mx-auto">
+              <%= data.domain.whois.registrar %>
+            </p>
+            <p>A Well known Organization</p>
+          </div>
+          <!-- domain card end -->
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="w-full mt-2">
+      <h1
+        class="text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-white"
+      >
+        Bids
+      </h1>
+      <div class="w-1/2 mx-auto mt-2">
+        <table
+          class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
+        >
+          <thead
+            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+          >
+            <tr>
+              <th scope="col" class="px-6 py-3">User</th>
+              <th scope="col" class="px-6 py-3">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% data.domain.bids.map((bid)=>{ %>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <td class="px-6 py-4">
+                <%= bid.user.firstName %> <%= bid.user.lastName %>
+              </td>
+              <td class="px-6 py-4"><%= bid.amount %> $</td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <% if(data.domain.bids.length === 0){ %>
+        <h4
+          class="p-2 bg-emerald-500 rounded text-white w-1/2 mx-auto my-2 text-center"
+        >
+          No Bids Placed Till Now
+        </h4>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- footer -->
+<%- include("../partials/footer.ejs") %>

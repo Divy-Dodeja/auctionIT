@@ -1,0 +1,10 @@
+<%- include("./partials/header.ejs",{title:message}) %>
+<div
+  class="container min-h-[90vh] p-4 mx-auto flex justify-center items-center"
+>
+  <div class="text-center">
+    <h1 class="text-9xl"><%= status %></h1>
+    <p class="text-2xl"><%= message %></p>
+  </div>
+</div>
+<%- include("./partials/footer.ejs") %>

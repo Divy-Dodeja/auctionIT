@@ -1,0 +1,20 @@
+version: "3"
+services:
+  node-app:
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    restart: always
+    env_file:
+      - .env
+    extra_hosts:
+      - "mongoservice:172.17.0.1"
+      - "redis-server:172.17.0.1"
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - ./:/app

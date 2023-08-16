@@ -1,0 +1,40 @@
+{
+  "name": "auctionit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
+    "bull": "^4.10.4",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-validation": "^4.1.0",
+    "helmet": "^6.0.1",
+    "http-status": "^1.6.2",
+    "is-valid-domain": "^0.1.6",
+    "jsonwebtoken": "^9.0.0",
+    "lodash": "^4.17.21",
+    "mongoose": "^7.0.2",
+    "mongoose-aggregate-paginate-v2": "^1.0.6",
+    "mongoose-history": "^0.8.0",
+    "mongoose-paginate-v2": "^1.7.1",
+    "nodemailer": "^6.9.1",
+    "tld-extract": "^2.1.0",
+    "whois-parsed": "^1.0.14",
+    "xss": "^1.0.14"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  }
+}

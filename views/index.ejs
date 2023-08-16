@@ -1,0 +1,95 @@
+<%- include("./partials/header.ejs") %>
+<body>
+    <%- include("./partials/components/nav.ejs") %>
+   <div class="container mx-auto p-5 min-h-[80vh]">
+    <form method="get" action="/" class="flex justify-between items-center">
+        <h1 class="py-5 text-3xl font-bold underline ">
+            Domains Listed in Auction
+        </h1>
+        <div>
+            <input type="text" name="search" class="p-2 bg-gray-50" placeholder="search domain" />
+            <button class="bg-indigo-400 p-2 text-white">Search</button>
+        </div>
+    </form>
+    
+
+<div class="relative overflow-x-auto">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3 flex gap-2">
+                    Domain Name <form action="" method="get">
+                        <%- include("./partials/components/hidden.ejs",{query,allowed:["search"]}) %>
+                        <button  name="sort" value="-url">&#8679;</button><button name="sort" value="url">&#8681;</button></form>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Seller 
+                </th>
+                <th scope="col" class="px-6 py-3 flex gap-2">
+                    CurrentBid <form  method="get">
+                        <%- include("./partials/components/hidden.ejs",{query,allowed:["search"]}) %>
+                        <button  name="sort" value="-currentBid">&#8679;</button><button name="sort" value="currentBid">&#8681;</button></form>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Expires 
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <% data.domains.map((domain)=>{ %>
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <a href="http://<%= domain.url %>" target="_blank"><%= domain.url %></a>
+                    </th>
+                    <td class="px-6 py-4">
+                        <%= domain.user.firstName %> <%= domain.user.lastName %>
+                    </td>
+                    <td class="px-6 py-4">
+                        $ <%= domain.currentBid %>
+                    </td>
+                    <td class="px-6 py-4">
+                        <%= domain.lastDateOfAuction.toLocaleString("en-US")  %>
+                    </td>
+                    <td class="px-6 py-4">
+                        <%- include("./partials/components/button.ejs",{href:`/bid/${domain._id}`,title:"Bid Now"}) %>
+                    </td>
+                </tr>
+            <% })  %>
+        </tbody>
+    </table>
+
+    </div>
+    <div class="flex justify-end p-4">
+            <!-- Previous Button -->
+    <% if(data.hasPrevPage){ %>
+        <form method="get">
+            <%- include("./partials/components/hidden.ejs",{query,allowed:["search","sort"]}) %>
+            <input type="hidden" name="page" value="<%= data.prevPage %>" />
+            <button class="inline-flex items-center px-4 py-2 mr-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                <svg aria-hidden="true" class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>
+                Previous
+              </button>
+        </form>
+        
+    <% } %>
+    <% if(data.hasNextPage){ %>
+        <form method="get">
+            <%- include("./partials/components/hidden.ejs",{query,allowed:["search","sort"]}) %>
+            <input type="hidden" name="page" value="<%= data.nextPage %>" />
+            <button class="inline-flex items-center px-4 py-2 mr-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            
+                Next <svg aria-hidden="true" class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              </button>
+        </form>
+    <% } %>
+    </div>
+
+   </div>
+   <!-- footer -->
+   <%- include("./partials/footer.ejs") %>
+</body>
+</html>
